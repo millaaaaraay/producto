@@ -12,8 +12,12 @@
   <link rel="stylesheet" href="./css/main.css">
 
   <script src="js/bootstrap.bundle.min.js"></script> 
+  <script src="js/jquery-3.7.1.min.js"></script> 
+  <script src="js/funciones.js"></script> 
 
-  <title>Tiendita</title>
+  
+
+  <title>Inicio</title>
 </head>
 
 <body>
@@ -85,6 +89,9 @@
   </div>
   <!--========================================================== -->
 
+
+<div id="main"></div>
+
   <section class="d-flex flex-column justify-content-center align-items-center pt-5  text-center w-50 m-auto"
     id="intro">
     <h1 class="p-3 fs-2 border-top border-3">Nuestra <span class="text-primary">Tiendit4.</span></h1>
@@ -137,10 +144,6 @@
 </section>
 
 
-
-
-
-
   <footer class="w-100  d-flex  align-items-center justify-content-center flex-wrap">
     <p class="fs-5 px-3  pt-3">Tiendit4. &copy; Todos Los Derechos Reservados 2024</p>
     <div id="iconos">
@@ -148,8 +151,41 @@
       <a href="#"><i class="bi bi-twitter"></i></a>
       <a href="#"><i class="bi bi-instagram"></i></a>
     </div>
+
+
+<div id="indicadores"></div>
+
   </footer>
 
+  <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-body">
+          <img id="myImg" src="img/ciberday.png" alt="Snow">  
+        </div>
+      </div>
+    </div>
+  </div>
+
 </body>
+
+<script>
+
+$.getJSON('https://mindicador.cl/api', function(data) {
+    var dailyIndicators = data;
+    $("<p/>", {
+        html: 'Valor UF $    ' + dailyIndicators.uf.valor
+    }).appendTo("#indicadores");
+    var dailyIndicators = data;
+    $("<p/>", {
+        html: 'Valor Dolar $' + dailyIndicators.dolar.valor
+    }).appendTo("#indicadores");
+
+}).fail(function() {
+    console.log('Error al consumir la API!');
+});
+</script>
+
+
 
 </html>
