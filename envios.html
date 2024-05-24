@@ -12,8 +12,10 @@
   <link rel="stylesheet" href="./css/main.css">
 
   <script src="js/bootstrap.bundle.min.js"></script> 
+  <script src="js/jquery-3.7.1.min.js"></script> 
+  <script src="js/funciones.js"></script> 
 
-  <title>Tiendita</title>
+  <title>Envios</title>
 </head>
 
 <body>
@@ -87,6 +89,31 @@
         </div>
 
   </div>
+
+<div class="calculaEnvio">
+
+  <div class="text1">Calculo solo disponibles para comunas de la zona norte de Santiago</div>
+
+
+
+  <label for="envio">Selecciona tu comuna:</label>
+
+<select name="envio" id="envio">
+  <option value="Conchalí">Conchalí</option>
+  <option value="Huechuraba">Huechuraba</option>
+  <option value="Independencia">Independencia</option>
+  <option value="Recoleta">Recoleta</option>
+  <option value="Quilicura">Quilicura</option>
+  <option value="Renca">Renca</option>
+
+</select>
+
+<div id="costoDespacho"></div>
+
+
+</div>
+
+
   </section>
 
 
@@ -98,8 +125,29 @@
       <a href="#"><i class="bi bi-twitter"></i></a>
       <a href="#"><i class="bi bi-instagram"></i></a>
     </div>
+
+    <div id="indicadores"></div>
+
   </footer>
 
 </body>
+
+
+<script>
+
+  $.getJSON('https://mindicador.cl/api', function(data) {
+      var dailyIndicators = data;
+      $("<p/>", {
+          html: 'Valor UF $    ' + dailyIndicators.uf.valor
+      }).appendTo("#indicadores");
+      var dailyIndicators = data;
+      $("<p/>", {
+          html: 'Valor Dolar $' + dailyIndicators.dolar.valor
+      }).appendTo("#indicadores");
+  
+  }).fail(function() {
+      console.log('Error al consumir la API!');
+  });
+  </script>
 
 </html>
